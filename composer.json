@@ -17,9 +17,9 @@
         "symfony/framework-bundle": "2.*"
     },
     "autoload": {
-        "psr-0": { "Jrk\\AdminAtomBundle": "" }
+        "psr-0": { "Jrk\\Admin\\AtomBundle": "" }
     },
-    "target-dir": "Jrk/AdminAtomBundle",
+    "target-dir": "Jrk/Admin/AtomBundle",
 	"extra": {
         "branch-alias": {
             "dev-master": "1.0-dev"
