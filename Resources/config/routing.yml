@@ -1,0 +1,8 @@
+####################################
+#           Debug
+###################################
+
+jrk_admin_atom_debug_history:
+    path:     /debug/history
+    defaults: { _controller: JrkAdminAtomBundle:Inside/Debug:history }
+

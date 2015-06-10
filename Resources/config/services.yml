@@ -1,0 +1,31 @@
+parameters:
+    jrk_admin_atom.history_manager.class: Jrk\Admin\AtomBundle\Manager\HistoryManager
+    jrk_admin_atom.action_manager.class: Jrk\Admin\AtomBundle\Manager\ActionManager
+    jrk_admin_atom.subscription_entity_manager.class: Jrk\Admin\AtomBundle\Manager\SubscriptionEntityManager
+    jrk_admin_atom.unique_session_listener.class: Jrk\Admin\AtomBundle\Listener\UniqueSessionListener
+    jrk_admin_atom.twig_routing_extra.class: Jrk\Admin\AtomBundle\Twig\Extension\RoutingExtraExtension
+
+services:
+    jrk_admin_atom.history_manager:
+        class: %jrk_admin_atom.history_manager.class%
+        arguments: [@session]
+
+    jrk_admin_atom.action_manager:
+        class: %jrk_admin_atom.action_manager.class%
+        arguments: [@jrk_admin_atom.history_manager, @jrk_admin_atom.subscription_entity_manager, @doctrine.orm.entity_manager]
+
+    jrk_admin_atom.subscription_entity_manager:
+        class: %jrk_admin_atom.subscription_entity_manager.class%
+        arguments: []
+
+    jrk_admin_atom.unique_session_listener:
+        class: %jrk_admin_atom.unique_session_listener.class%
+        arguments: []
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: updateRequest }
+
+    jrk_admin_atom.twig_routing_extra:
+        class: %jrk_admin_atom.twig_routing_extra.class%
+        arguments: [@service_container,@doctrine.orm.entity_manager,@twig]
+        tags:
+            - { name: twig.extension }
