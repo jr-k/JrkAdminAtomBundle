@@ -4,6 +4,7 @@ parameters:
     jrk_admin_atom.subscription_entity_manager.class: Jrk\Admin\AtomBundle\Manager\SubscriptionEntityManager
     jrk_admin_atom.unique_session_listener.class: Jrk\Admin\AtomBundle\Listener\UniqueSessionListener
     jrk_admin_atom.twig_routing_extra.class: Jrk\Admin\AtomBundle\Twig\Extension\RoutingExtraExtension
+    jrk_admin_atom.uploadable_garbage_collector.class: Jrk\Admin\AtomBundle\UploaderAdapters\UploadableGarbageCollector
 
 services:
     jrk_admin_atom.history_manager:
@@ -29,3 +30,9 @@ services:
         arguments: [@service_container,@doctrine.orm.entity_manager,@twig]
         tags:
             - { name: twig.extension }
+
+    jrk_admin_atom.uploadable_garbage_collector:
+        class: %jrk_admin_atom.uploadable_garbage_collector.class%
+        tags:
+            - { name: doctrine.event_listener, event: preRemove }
+

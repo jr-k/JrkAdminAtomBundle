@@ -87,6 +87,11 @@ class HistoryManager
         if (isset($deepEntitiesHistory['entities'])) {
             foreach($deepEntitiesHistory['entities'] as $timestamp => $deepEntities) {
                 $realTimestamp = substr($timestamp,0,-4);
+
+                if (isset($_GET['_atom']) && $_GET['_atom'] == $timestamp) {
+                    continue;
+                }
+
                 if ( ((int) $now - (int) $realTimestamp) > self::$sessionTimeout) {
                     unset($deepEntitiesHistory['entities'][$timestamp]);
                     unset($deepEntitiesHistory['base'][$realTimestamp]);
