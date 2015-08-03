@@ -21,7 +21,7 @@ trait Uploadable
         return 'resources/'.strtolower(__CLASS__).'-'.substr(md5(get_class($this)),0,6);
     }
 
-    public function getPicture()
+    public function getPicture($defaultResource = true)
     {
         $dir = $this->getUploadDirectoryPath();
         $files = array();
@@ -35,6 +35,10 @@ trait Uploadable
                 }
             }
         }
+		
+		if (!$defaultResource) {
+			return null;
+		}
 
         return $this->getResourceDirectoryPath().'/picture.jpg';
     }
