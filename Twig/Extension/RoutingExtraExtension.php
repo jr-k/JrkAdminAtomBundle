@@ -42,11 +42,20 @@ class RoutingExtraExtension extends \Twig_Extension {
         );
     }
 
-
+    public function isBackOffice($request)
+    {
+        $config = $this->container->getParameter('jrk_admin_atom.config')['routing'];
+        $regex = $config['regex'] ? $config['prefix'] : '#^/'.$config['prefix'].'/#';
+        return preg_match($regex,$request->getPathInfo());
+    }
 
     function deepPath($name, $parameters = array(), $relative = false) {
         $request = $this->container->get('request_stack')->getCurrentRequest();
 
+        if (!$this->isBackOffice($request)) {
+            return $this->container->get('router')->generate($name, $parameters, $relative ? UrlGeneratorInterface::RELATIVE_PATH : UrlGeneratorInterface::ABSOLUTE_PATH);
+        }
+        
         if (isset($_GET['_atom'])) {
             $parameters['_atom'] = $_GET['_atom'];
         } else {

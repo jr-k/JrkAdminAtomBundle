@@ -40,5 +40,16 @@ public function registerBundles()
 ```
 
 
+Configuration
+-------------
+
+``` yml
+# app/config/config.yml
+
+jrk_admin_atom:
+    routing:
+        prefix: 'back'
+```
+
 Usage
 -----
