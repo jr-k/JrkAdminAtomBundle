@@ -45,8 +45,9 @@ class RoutingExtraExtension extends \Twig_Extension {
     public function isBackOffice($request)
     {
         $config = $this->container->getParameter('jrk_admin_atom.config')['routing'];
-        $regex = $config['regex'] ? $config['prefix'] : '#^/'.$config['prefix'].'/#';
-        return preg_match($regex,$request->getPathInfo());
+        $regex = $config['regex'] ? $config['prefix'] : '#/'.$config['prefix'].'/#';
+        $infoPath = $_SERVER['PHP_SELF'];
+        return preg_match($regex,$infoPath);
     }
 
     function deepPath($name, $parameters = array(), $relative = false) {
