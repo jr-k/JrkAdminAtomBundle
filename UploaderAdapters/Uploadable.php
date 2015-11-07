@@ -31,7 +31,9 @@ trait Uploadable
 
             foreach($files as $imgNameKey => $imgName){
                 if($imgName !== '.' && $imgName !== '..'){
-                    return $dir.'/'.$imgName;
+                    if (!is_dir($dir.'/'.$imgName)) {
+                        return $dir.'/'.$imgName;
+                    }
                 }
             }
         }
