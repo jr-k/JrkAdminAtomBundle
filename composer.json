@@ -3,7 +3,7 @@
     "type": "symfony-bundle",
     "description": "admin atom bundle for symfony2",
     "keywords": ["jrk","admin","atom","cms","back-office"],
-    "homepage": "http://github.com/jreziga/JrkAdminAtomBundle",
+    "homepage": "http://github.com/jr-k/JrkAdminAtomBundle",
     "license": "GNU GPL v2",
     "authors": [
         {
